@@ -20,7 +20,7 @@ export default function App() {
 
       <Image 
       style={{ width: 200, height: 200, top: 200}}
-      source={require('./assets/logo.png')} />
+      source={require('./assets/SearchLogo.png')} />
     </View>
 
      
