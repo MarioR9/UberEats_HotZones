@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TextInput,  Text, View } from 'react-native';
+import { StyleSheet,Image, Text, View } from 'react-native';
 
 
 export default function App() {
@@ -9,16 +9,15 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text
-      style={{ top: -300, left: -110}}
+      style={{ top: -200, left: -90}}
       >Search Bar Goes Here</Text>
       <Text
-      style={{ top: -317, left: 110}}
+      style={{ top: -216, left: 140}}
       >Profile</Text>
 
-      <Text
-      style={{top: 300}}
-      >Search Button</Text>
-        
+      <Image 
+      style={{ width: 200, height: 200, top: 300}}
+      source={require('./assets/logo.png')} />
     </View>
 
      
