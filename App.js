@@ -8,14 +8,17 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Text>Enter The City</Text>
+      <Text
+      style={{ top: -300, left: -110}}
+      >Search Bar Goes Here</Text>
+      <Text
+      style={{ top: -317, left: 110}}
+      >Profile</Text>
 
-      <TextInput
-      style={{ height: 40, width: 160, borderColor: 'red', borderWidth: 2 }}
-      onChangeText={text => onChangeText(text)}
-      value={value}
-    />
-        <Text></Text>
+      <Text
+      style={{top: 300}}
+      >Search Button</Text>
+        
     </View>
 
      
