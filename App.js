@@ -8,15 +8,18 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Text
-      style={{ top: -200, left: -90}}
-      >Search Bar Goes Here</Text>
-      <Text
-      style={{ top: -216, left: 140}}
-      >Profile</Text>
+      <Image
+      source={require('./assets/search.png')}
+      style={{ width: 130, height: 130, top: -120, left: -140}}
+      />
+
+      <Image
+      source={require('./assets/profile.png')}
+      style={{ width: 130, height: 130, bottom: 250, left: 140}}
+      />
 
       <Image 
-      style={{ width: 200, height: 200, top: 300}}
+      style={{ width: 200, height: 200, top: 200}}
       source={require('./assets/logo.png')} />
     </View>
 
