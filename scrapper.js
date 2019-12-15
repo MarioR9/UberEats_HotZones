@@ -68,3 +68,50 @@ let scrape = (async () => {
 })();
 
 
+
+// await page.evaluate(() => { 
+//   document.getElementsByClassName("section-back-to-list-button blue-link noprint")[0].click(); 
+// });  
+// await page.waitFor(4000);
+// await page.evaluate(() => { 
+//   document.getElementsByClassName("section-result")[1].click(); 
+// });
+// await page.screenshot({path: 'example2.png'});
+// await page.waitFor(4000);
+
+// const result2 = await page.evaluate(() => {
+//   let check = document.getElementsByClassName("section-info-text")[4].innerText
+//   let closeRest = ""
+//   console.log("second " + check)
+
+//   let busyStateNotLive = null
+//   if (check == "Closed." || check =="Cerrado."){
+//     closeRest = "RESTAURANTs ARE CLOSE! IN THIS AREA"
+
+//     console.log(closeRest)
+    
+//     return {
+//       closeRest
+//     }
+
+
+//     }else if (busyStateNotLive == ""){
+//         busyStateNotLive = document.getElementsByClassName("section-popular-times-value section-popular-times-current-value")[0].parentElement.attributes[0].textContent.slice(0,3) 
+//         let restName = document.getElementsByClassName('GLOBAL__gm2-headline-5 section-hero-header-title-title')[0].innerText
+
+//         return {
+//           busyStateNotLive,
+//           restName 
+//         }
+      
+//     }else{
+//     let percent = document.getElementsByClassName("section-popular-times-value section-popular-times-live-value")[0].attributes[0].textContent
+//     let restName = document.getElementsByClassName('GLOBAL__gm2-headline-5 section-hero-header-title-title')[0].innerText
+     
+//     return {
+//       percent,
+//       restName
+//     }  
+//   }
+
+// });    
