@@ -92,7 +92,17 @@ for (let i = 0; i <
         document.getElementsByClassName("section-back-to-list-button blue-link noprint")[0].click(); 
       }); 
     
-    
+      await page.waitFor(2000);
+    if(i == sectionResultCollection[0].Divs - 1){
+      i = 0
+      await page.evaluate(() => { 
+        document.getElementsByClassName("n7lv7yjyC35__button-next-icon")[0].click(); 
+      });
+      await page.waitFor(2000); 
+      console.log("page: " + pageCounter)
+      pageCounter++
+
+    }
   }
   
 })();
