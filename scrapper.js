@@ -102,6 +102,11 @@ for (let i = 0; i <
       console.log("page: " + pageCounter)
       pageCounter++
 
+      if(pageCounter == 6){
+        console.log(sectionsArray)
+        browser.close();
+        return sectionsArray;
+      }
     }
   }
   
