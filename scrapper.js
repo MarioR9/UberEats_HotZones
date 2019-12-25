@@ -89,7 +89,7 @@ for (let i = 0; i <
     console.log("We r on Page: " + pageCounter)
     
       await page.evaluate(() => { 
-        document.getElementsByClassName("section-back-to-list-button blue-link noprint")[0].click(); 
+        document.getElementsByClassName("section-back-to-list-button blue-link noprint"); 
       }); 
     
     
