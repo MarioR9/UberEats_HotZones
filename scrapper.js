@@ -85,7 +85,13 @@ for (let i = 0; i <
   });
     sectionsArray.push(result)
     console.log(result)
-   
+    console.log("I is now: " + i)
+    console.log("We r on Page: " + pageCounter)
+    
+      await page.evaluate(() => { 
+        document.getElementsByClassName("section-back-to-list-button blue-link noprint")[0].click(); 
+      }); 
+    
     
   }
   
