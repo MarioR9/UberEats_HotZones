@@ -1,11 +1,37 @@
 import React from 'react';
-import { StyleSheet,Image, Text, View } from 'react-native';
+import { StyleSheet,Image, TextInput, View, Alert, Button } from 'react-native';
 
 
 export default function App() {
   //using Hooks To set input text 
   const [value, onChangeText] = React.useState('');
+  const localHost = ""
+  startFetch=()=>{
+    console.log("fetch sent")
+    console.log("this is the value: " + value)
+    const data = { location: value}
+    const options = {
+      method: 'POST',
+      headers : { 
+        'Content-Type': 'application/json',
+       },
+      body: JSON.stringify(data),
+     
+    }
   
+    fetch(`http://${localHost}:3000/api`, options)
+    .then(resp=>resp.json())
+    .then(data=>{
+      // debugger
+      console.log(data)
+      
+    }).catch(err => {
+      // Do something for an error here
+      console.log("Error Reading data " + err);
+    });
+  }
+  
+
   return (
     <View style={styles.container}>
       <Image
@@ -18,12 +44,20 @@ export default function App() {
       style={{ width: 130, height: 130, bottom: 250, left: 140}}
       />
 
-      <Image 
-      style={{ width: 200, height: 200, top: 200}}
-      source={require('./assets/SearchLogo.png')} />
+      <TextInput
+      style={{ height: 40, width: 80, borderColor: 'gray', borderWidth: 1 }}
+      onChangeText={text => onChangeText(text)}
+      value={value}
+     />
+      <Button
+          style={{ width: 200, height: 200, top: 200}} 
+          title="Press me"
+          onPress={() => this.startFetch()}
+        />
+      
+
     </View>
 
-     
   );
 }
 
@@ -35,3 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+

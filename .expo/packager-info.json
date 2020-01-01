@@ -2,8 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 4892,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPid": 10420,
+  "expoServerNgrokUrl": "https://sm-xgn.sjoker.ubereats-hotzones.exp.direct",
+  "packagerNgrokUrl": "https://packager.sm-xgn.sjoker.ubereats-hotzones.exp.direct",
+  "ngrokPid": 10920
 }
