@@ -4,8 +4,9 @@ import { StyleSheet,Image, TextInput, View, Alert, Button } from 'react-native';
 
 export default function App() {
   //using Hooks To set input text 
-  const [value, onChangeText] = React.useState('');
+  const [value, onChangeText] = React.useState('Enter Location Here');
   const localHost = ""
+  const textSize = value.length * 10 + 5;
   startFetch=()=>{
     console.log("fetch sent")
     console.log("this is the value: " + value)
@@ -45,7 +46,7 @@ export default function App() {
       />
 
       <TextInput
-      style={{ height: 40, width: 80, borderColor: 'gray', borderWidth: 1 }}
+      style={{ height: 40, width: textSize, borderColor: 'gray', borderWidth: 1 }}
       onChangeText={text => onChangeText(text)}
       value={value}
      />
