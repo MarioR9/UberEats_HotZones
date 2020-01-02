@@ -4,9 +4,12 @@ import { StyleSheet,Image, TextInput, View, Alert, Button } from 'react-native';
 
 export default function App() {
   //using Hooks To set input text 
-  const [value, onChangeText] = React.useState('Enter Location Here');
+  const [value, onChangeText] = React.useState('springfield');
+ 
   const localHost = ""
   const textSize = value.length * 10 + 5;
+
+  
   startFetch=()=>{
     console.log("fetch sent")
     console.log("this is the value: " + value)
@@ -23,9 +26,16 @@ export default function App() {
     fetch(`http://${localHost}:3000/api`, options)
     .then(resp=>resp.json())
     .then(data=>{
-      // debugger
       console.log(data)
-      
+      Alert.alert(
+        'Alert Title',
+        data,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+      console.log("received.")
     }).catch(err => {
       // Do something for an error here
       console.log("Error Reading data " + err);
