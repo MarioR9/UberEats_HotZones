@@ -28,7 +28,7 @@ export default function App() {
     .then(data=>{
       console.log(data)
       Alert.alert(
-        'Alert Title',
+        'Response',
         data,
         [
           {text: 'OK', onPress: () => console.log('OK Pressed')},
