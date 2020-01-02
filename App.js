@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet,Image, TextInput, View, Alert, Button } from 'react-native';
+import MapView from 'react-native-maps';
+import { StyleSheet,Image, Text, TouchableOpacity, TextInput, View, Alert, Button } from 'react-native';
 
 
 export default function App() {
   //using Hooks To set input text 
   const [value, onChangeText] = React.useState('springfield');
- 
+  const [hidden, setHidden] = React.useState(true);
+
   const localHost = ""
   const textSize = value.length * 10 + 5;
 
@@ -41,45 +43,44 @@ export default function App() {
       console.log("Error Reading data " + err);
     });
   }
-  
+
 
   return (
-    <View style={styles.container}>
-      <Image
-      source={require('./assets/search.png')}
-      style={{ width: 130, height: 130, top: -120, left: -140}}
-      />
+ 
+    <View style={{flex: 1}}>
+    {
+    hidden == true
+    ?
+    <TouchableOpacity onPress={()=>setHidden(false)}>
+        <Image style={{width: 130, height: 130}} source={require('./assets/search.png')} />
+    </TouchableOpacity>
+     :
+    <TextInput
+    style={{ marginTop: 20, width: textSize, height: 30, right: -20,borderColor: 'red', borderWidth: 1}}
+    onChangeText={text => onChangeText(text)}
+    value={value}
+   />
+    }
+     <TouchableOpacity onPress={()=>this.startFetch()}>
+        <Image style={{width: 130, height: 130}} source={require('./assets/SearchLogo.png')} />
+    </TouchableOpacity>
 
-      <Image
-      source={require('./assets/profile.png')}
-      style={{ width: 130, height: 130, bottom: 250, left: 140}}
-      />
+      <MapView
+          style={{flex: 1}}
+          region={{
+            latitude: -27.210753,
+            longitude: -49.644183,
+            latitudeDelta: 0.0143,
+            longitudeDelta: 0.0134
+          }}
 
-      <TextInput
-      style={{ height: 40, width: textSize, borderColor: 'gray', borderWidth: 1 }}
-      onChangeText={text => onChangeText(text)}
-      value={value}
-     />
-      <Button
-          style={{ width: 200, height: 200, top: 200}} 
-          title="Press me"
-          onPress={() => this.startFetch()}
-        />
-      
-
+          showsUserLocation={true}
+          showsCompass={true}
+          zoomControlEnabled={true}
+          showsTraffic={true}
+          loadingEnabled={true}
+          
+      />   
     </View>
-
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-
-
