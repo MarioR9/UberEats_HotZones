@@ -7,6 +7,8 @@ export default function App() {
   //using Hooks To set input text 
   const [value, onChangeText] = React.useState('springfield');
   const [hidden, setHidden] = React.useState(true);
+  const [lat, setLat] = React.useState(0)
+  const [lon, setLon] = React.useState(0)
 
   const localHost = ""
   const textSize = value.length * 10 + 5;
@@ -37,6 +39,9 @@ export default function App() {
         ],
         { cancelable: false }
       )
+      setLat(data.lat)
+      setLon(data.lon)
+      console.log("latitude: "+ parseFloat(data.lat) + "longitud: " + parseFloat(data.lon))
       console.log("received.")
     }).catch(err => {
       // Do something for an error here
@@ -65,22 +70,30 @@ export default function App() {
         <Image style={{width: 130, height: 130}} source={require('./assets/SearchLogo.png')} />
     </TouchableOpacity>
 
-      <MapView
-          style={{flex: 1}}
-          region={{
-            latitude: -27.210753,
-            longitude: -49.644183,
-            latitudeDelta: 0.0143,
-            longitudeDelta: 0.0134
-          }}
-
+   {
+    lat == 0 && lon == 0 ?
+    <MapView style={{flex: 1}}
           showsUserLocation={true}
           showsCompass={true}
           zoomControlEnabled={true}
           showsTraffic={true}
           loadingEnabled={true}
-          
+    />   
+  :
+    <MapView style={{flex: 1}}
+            region={{
+              latitude: lat,
+              longitude: lon,
+              latitudeDelta: 0.0143,
+              longitudeDelta: 0.0134
+            }}
+            showsCompass={true}
+            zoomControlEnabled={true}
+            showsTraffic={true}
+            loadingEnabled={true}
       />   
+  }
+
     </View>
   );
 }
