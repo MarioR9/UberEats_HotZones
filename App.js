@@ -1,17 +1,22 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet,Image, Text, TouchableOpacity, TextInput, View, Alert, Button } from 'react-native';
+import {
+  Image, 
+  TouchableOpacity, 
+  TextInput, 
+  View, 
+  Alert}
+from 'react-native';
 
 
 export default function App() {
   //using Hooks To set input text 
-  const [value, onChangeText] = React.useState('springfield');
+  const [value, onChangeText] = React.useState('');
   const [hidden, setHidden] = React.useState(true);
   const [lat, setLat] = React.useState(0)
   const [lon, setLon] = React.useState(0)
 
   const localHost = ""
-  const textSize = value.length * 10 + 5;
 
   
   startFetch=()=>{
@@ -39,12 +44,11 @@ export default function App() {
         ],
         { cancelable: false }
       )
-      setLat(data.lat)
-      setLon(data.lon)
-      console.log("latitude: "+ parseFloat(data.lat) + "longitud: " + parseFloat(data.lon))
+      setLat(parseFloat(data.lat))
+      setLon(parseFloat(data.lon))
       console.log("received.")
     }).catch(err => {
-      // Do something for an error here
+      // Error handling
       console.log("Error Reading data " + err);
     });
   }
@@ -61,8 +65,10 @@ export default function App() {
     </TouchableOpacity>
      :
     <TextInput
-    style={{ marginTop: 20, width: textSize, height: 30, right: -20,borderColor: 'red', borderWidth: 1}}
+    style={{ marginTop: 20, width: 120, height: 30, right: -20,borderColor: 'red', borderWidth: 1}}
     onChangeText={text => onChangeText(text)}
+    placeholder="  Springfield,VA"
+    placeholderTextColor="gray"
     value={value}
    />
     }

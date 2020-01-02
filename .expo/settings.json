@@ -3,6 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "sm-xgn",
+  "urlRandomness": "sc-952",
   "https": false
 }
