@@ -18,15 +18,14 @@ export default function App() {
   const [lat, setLat] = React.useState(0)
   const [lon, setLon] = React.useState(0)
   const [busyColor, setBusyColor] = React.useState('#fc000046')
-  const [idleColor, setIdleColor] = React.useState('#02bd0c2a')
-  const [semyBusyColor, setSemiBusyColor]= React.useState('#e7d42d4f')
+ 
   const localHost = ""
   
   
   handleFetch=()=>{
     console.log("fetch sent")
     console.log("this is the value: " + value)
-    const data = { location: value}
+    const data = { location: "springfield,va"}
     const options = {
       method: 'POST',
       headers : { 
@@ -40,17 +39,22 @@ export default function App() {
     .then(resp=>resp.json())
     .then(data=>{
       console.log(data)
-      Alert.alert(
-        'Response',
-        data,
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      )
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
-      
+
+      let numbers = data.response.map(x => parseInt(x.bussynessPercentage))
+      let total = numbers.reduce((a, b) => a + b) / numbers.length
+      console.log("total % " + total)
+      // Radious color key.
+      if(total > 10 && total <35){
+        setBusyColor('#02bd0c2a')
+      }else if(total > 36 && total < 65){
+        setBusyColor('#e7d42d4f')
+      }else{
+        setBusyColor('#fc000046')
+      }
+
+     
       console.log("received.")
     }).catch(err => {
       // Error handling
@@ -93,8 +97,8 @@ export default function App() {
         opacity={0.5}
         radius={700}
         strokeWidth={2}
-        strokeColor = {idleColor}
-        fillColor={idleColor}
+        strokeColor = {busyColor}
+        fillColor={busyColor}
       />  
       
     </MapView> 
