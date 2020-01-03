@@ -25,7 +25,7 @@ export default function App() {
   handleFetch=()=>{
     console.log("fetch sent")
     console.log("this is the value: " + value)
-    const data = { location: "springfield,va"}
+    const data = { location: value}
     const options = {
       method: 'POST',
       headers : { 
@@ -42,9 +42,16 @@ export default function App() {
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
 
-      let numbers = data.response.map(x => parseInt(x.bussynessPercentage))
-      let total = numbers.reduce((a, b) => a + b) / numbers.length
+      let numbers = data.response.map(num => parseInt(num.bussynessPercentage.replace(/[^a-zA-Z0-9 ]/g, "")))
+      let removeNaN = numbers.filter(value => {
+        return !Number.isNaN(value);
+        })
+      let total = removeNaN.reduce((a, b) => a + b) / removeNaN.length
+      
+      console.log("array of numbers " + numbers)
+      console.log("array of numbers to removed " + removeNaN)
       console.log("total % " + total)
+
       // Radious color key.
       if(total > 10 && total <35){
         setBusyColor('#02bd0c2a')
@@ -53,9 +60,8 @@ export default function App() {
       }else{
         setBusyColor('#fc000046')
       }
-
-     
       console.log("received.")
+
     }).catch(err => {
       // Error handling
       console.log("Error Reading data " + err);
