@@ -36,15 +36,6 @@ export default function App() {
     .then(resp=>resp.json())
     .then(data=>{()=>{ setAnimation(false) }
      
-      // Alert.alert(
-      //   'TEST',
-      //   'Information Collected',
-      //   [
-      //     {text: 'OK', onPress: () =>console.log("ok pressed") },
-      //   ]
-      // );
-      
-      // console.log(data)
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
 
