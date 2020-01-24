@@ -20,7 +20,7 @@ export default function App() {
   const [busyColor, setBusyColor] = React.useState('#ffffff3a')
   const [searchAnimation, setAnimation] = React.useState(false)
 
-  const localHost = "192.168.1.151"
+  const localHost = ""
 
   handleFetch=()=>{
     setAnimation(false) //fix async issu with animation
