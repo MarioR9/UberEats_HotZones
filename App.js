@@ -36,6 +36,15 @@ export default function App() {
     .then(resp=>resp.json())
     .then(data=>{()=>{ setAnimation(false) }
      
+      // Alert.alert(
+      //   'TEST',
+      //   'Information Collected',
+      //   [
+      //     {text: 'OK', onPress: () =>console.log("ok pressed") },
+      //   ]
+      // );
+      
+      // console.log(data)
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
 
@@ -76,6 +85,7 @@ export default function App() {
             zoomControlEnabled={true}
             showsTraffic={true}
             loadingEnabled={true} 
+            showsUserLocation={true}
       >         
            {
             searchAnimation == true
@@ -112,9 +122,9 @@ export default function App() {
               marginTop: 30,
               width: 120, 
               height: 30, 
-              right: -200}}
+              right: -120}}
             onChangeText={text => onChangeText(text)}
-            placeholder="Springfield,VA"
+            placeholder="City,State"
             placeholderTextColor="gray"
             value={value}
             />
