@@ -20,7 +20,7 @@ export default function App() {
   const [busyColor, setBusyColor] = React.useState('#ffffff3a')
   const [searchAnimation, setAnimation] = React.useState(false)
 
-  const localHost = ""
+  const localHost = "LOCAL_IPADRESS_HERE"
 
   handleFetch=()=>{
     setAnimation(false) //fix async issu with animation
@@ -85,6 +85,7 @@ export default function App() {
             zoomControlEnabled={true}
             showsTraffic={true}
             loadingEnabled={true} 
+            showsUserLocation={true}
       >         
            {
             searchAnimation == true
@@ -121,9 +122,9 @@ export default function App() {
               marginTop: 30,
               width: 120, 
               height: 30, 
-              right: -200}}
+              right: -120}}
             onChangeText={text => onChangeText(text)}
-            placeholder="Springfield,VA"
+            placeholder="City,State"
             placeholderTextColor="gray"
             value={value}
             />
