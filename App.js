@@ -20,7 +20,7 @@ export default function App() {
   const [busyColor, setBusyColor] = React.useState('#ffffff3a')
   const [searchAnimation, setAnimation] = React.useState(false)
 
-  const localHost = "LOCAL_IPADRESS_HERE"
+  const localHost = "192.168.1.151"
 
   handleFetch=()=>{
     setAnimation(false) //fix async issu with animation
@@ -36,6 +36,15 @@ export default function App() {
     .then(resp=>resp.json())
     .then(data=>{()=>{ setAnimation(false) }
      
+      // Alert.alert(
+      //   'TEST',
+      //   'Information Collected',
+      //   [
+      //     {text: 'OK', onPress: () =>console.log("ok pressed") },
+      //   ]
+      // );
+      
+      // console.log(data)
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
 
