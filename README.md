@@ -1,7 +1,7 @@
 # UberEats_HotZones
 UberEats city hotzones
 
-Using Puppeteer.js to scrape data from google maps and Express.js to collect and fetch data. The application displays information to a user of specific US locations.
+Using Puppeteer.js to scrape data from google maps and Express.js to collect and fetch data. The application displays information to a user about how busy the restaurants are around a specific US location.
 
 the app will start with a map showing the user's current location, a search input fill, and a search button.
 
