@@ -1,12 +1,13 @@
 import React from 'react';
+import { Container, Header, Item, Input, Icon, Button, Text, Spinner } from 'native-base';
 import MapView from'react-native-maps';
-import PulseLoader from 'react-native-pulse-loader';
+
+
 import {
-  Image, 
-  TouchableOpacity, 
-  TextInput, 
-  View, 
-  Alert
+  SafeAreaView,
+  Modal,
+  View,
+  StyleSheet
        }
 from 'react-native';
 
@@ -18,12 +19,12 @@ export default function App() {
   const [lat, setLat] = React.useState(0)
   const [lon, setLon] = React.useState(0)
   const [busyColor, setBusyColor] = React.useState('#ffffff3a')
-  const [searchAnimation, setAnimation] = React.useState(false)
-
-  const localHost = "LOCAL_IPADRESS_HERE"
+  const [modalVisible, setModalVisible] = React.useState(false);
+  
+  const localHost = "IPADRESS"
 
   handleFetch=()=>{
-    setAnimation(false) //fix async issu with animation
+    setModalVisible(true)
     const data = { location: value}
     const options = {
       method: 'POST',
@@ -34,7 +35,7 @@ export default function App() {
     }
     fetch(`http://${localHost}:3000/api`, options)
     .then(resp=>resp.json())
-    .then(data=>{()=>{ setAnimation(false) }
+    .then(data=>{()=>
      
       // Alert.alert(
       //   'TEST',
@@ -45,6 +46,7 @@ export default function App() {
       // );
       
       // console.log(data)
+      setModalVisible(false)
       setLat(parseFloat(data.lat))
       setLon(parseFloat(data.lon))
 
@@ -62,7 +64,7 @@ export default function App() {
       if(total > 10 && total <35){
         setBusyColor('#02bd0c2a')
       }else if(total > 36 && total < 65){
-        setBusyColor('#e7d42d4f')       
+        setBusyColor('#e7d42d4f')    
       }else{
         setBusyColor('#fc000046')
       }
@@ -76,104 +78,104 @@ export default function App() {
  
   return (
 
-    <View style={{flex: 1}}>
-      {
-      lat == 0 && lon == 0 ? 
-  
+    <SafeAreaView style={{flex: 1}}>
+       <Container>
+       <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}>
+
+          <View style={styles.centeredView}>
+          <Spinner style={styles.modalText}/>
+        </View>
+        </Modal>
+        
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" onChangeText={text => onChangeText(text)} />
+          </Item>
+          <Button onPress={()=>this.handleFetch()} transparent>
+            <Text>Search</Text>
+          </Button>
+        </Header>
+        {
+      lat == 0 && lon == 0 
+      ?
       <MapView style={{flex: 1}}
             showsCompass={true}
             zoomControlEnabled={true}
             showsTraffic={true}
             loadingEnabled={true} 
-            showsUserLocation={true}
-      >         
-           {
-            searchAnimation == true
-            ?
-          <View>
-              <PulseLoader
-              borderColor='#02ff23a8'
-              backgroundColor='#c915ba5e'
-              pulseMaxSize={700}
-              size={0}
-              avatar={'./assets/SearchLogo.png'}
-              />
-              
-          </View>
-            :
-            null
-          }     
-          <View>
-            {
-            hidden == false
-            ?
-            <TouchableOpacity onPress={()=>setHidden(true)}>
-                <Image style={{
-                  position: 'absolute', 
-                  left: 0, 
-                  top: 0,
-                  width: 130, 
-                  height: 130}} 
-                  source={require('./assets/search.png')} />
-            </TouchableOpacity>
-            :
-            <TextInput
-            style={{ 
-              marginTop: 30,
-              width: 120, 
-              height: 30, 
-              right: -120}}
-            onChangeText={text => onChangeText(text)}
-            placeholder="City,State"
-            placeholderTextColor="gray"
-            value={value}
-            />
-            }
-            <TouchableOpacity onPress={()=>this.handleFetch()}>
-                <Image style={
-                  {position: 'absolute', 
-                  left: 0, 
-                  top: 80,
-                  width: 130, 
-                  height: 130}} 
-                  source={require('./assets/SearchLogo.png')} />
-            </TouchableOpacity>
-          </View>   
-         
-      </MapView>  
-          :
-      
-      <MapView 
-          style={{flex: 1}}
-              region={{
-                latitude: lat,
-                longitude: lon,
-                latitudeDelta: 0.0143,
-                longitudeDelta: 0.0134
-              }}
-              showsCompass={true}
-              zoomControlEnabled={true}
-              showsTraffic={true}
-              loadingEnabled={true}
-        > 
-      <MapView.Circle
-          center={{
-            latitude: lat,
-            longitude: lon,
-          }}
-          radius={600}
-          strokeWidth={3}
-          strokeColor = {busyColor}
-          fillColor={busyColor}
-        />  
-        
+            showsUserLocation={true}>    
       </MapView> 
       
-        }
-      
-  
-    </View>
+      :
+      <MapView 
+      style={{flex: 1}}
+          region={{
+            latitude: lat,
+            longitude: lon,
+            latitudeDelta: 0.0143,
+            longitudeDelta: 0.0134
+          }}
+          showsCompass={true}
+          zoomControlEnabled={true}
+          showsTraffic={true}
+          loadingEnabled={true}
+    > 
+  <MapView.Circle
+      center={{
+        latitude: lat,
+        longitude: lon,
+      }}
+      radius={600}
+      strokeWidth={3}
+      strokeColor = {busyColor}
+      fillColor={busyColor}
+    />  
+  </MapView> 
+  }
+      </Container>
+    </SafeAreaView>
   );
 }
 
-
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});
