@@ -1,5 +1,5 @@
 # UberEats_HotZones
-UberEats city hotzones
+UberEats city hotzones(React native)
 
 Using Puppeteer.js to scrape data from google maps and Express.js to collect and fetch data. The application displays information to a user about how busy the restaurants are around a specific US location.
 
