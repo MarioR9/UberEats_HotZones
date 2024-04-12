@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
-    "express": "^4.17.1",
+    "express": "^4.19.2",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-loadingg": "^1.6.2",
